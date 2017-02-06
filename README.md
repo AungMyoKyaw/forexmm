@@ -2,7 +2,6 @@
 
 [http://forex.cbm.gov.mm/index.php/api](http://forex.cbm.gov.mm/index.php/api) does not allow CORS.
 This npm package help you to bypass CORS issue and to build Myanmar Exchange Rate API server.
-[![NPM](https://nodei.co/npm/forexmm.png?downloads=true)](https://nodei.co/npm/forexmm/)
 
 ## Installation
 ```
