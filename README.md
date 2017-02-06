@@ -1,6 +1,7 @@
-# FOREXMM [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/AungMyoKyaw/forexmm/issues)
+# FOREXMM [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/AungMyoKyaw/forexmm/issues)[![NSP Status](https://nodesecurity.io/orgs/aung-myo-kyaw/projects/33eab043-23a0-4fff-a650-57066c299938/badge)](https://nodesecurity.io/orgs/aung-myo-kyaw/projects/33eab043-23a0-4fff-a650-57066c299938)
 
-[![NPM](https://nodei.co/npm/forexmm.png?downloads=true)](https://nodei.co/npm/baydin/)
+[![NPM](https://nodei.co/npm/forexmm.png?downloads=true)](https://nodei.co/npm/forexmm/)
+
 [http://forex.cbm.gov.mm/index.php/api](http://forex.cbm.gov.mm/index.php/api) does not allow CORS.
 This npm package help you to bypass CORS issue and to build Myanmar Exchange Rate API server.
 
