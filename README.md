@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/AungMyoKyaw/forexmm.png?label=ready&title=Ready)](https://waffle.io/AungMyoKyaw/forexmm)
 # FOREXMM [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/AungMyoKyaw/forexmm/issues)[![NSP Status](https://nodesecurity.io/orgs/aung-myo-kyaw/projects/33eab043-23a0-4fff-a650-57066c299938/badge)](https://nodesecurity.io/orgs/aung-myo-kyaw/projects/33eab043-23a0-4fff-a650-57066c299938)
 
 [http://forex.cbm.gov.mm/index.php/api](http://forex.cbm.gov.mm/index.php/api) does not allow CORS.
