@@ -2,7 +2,7 @@
 'use strict';
 const http = require('http');
 
-function getLatest(cb){
+const getLatest = new Promise((resolve,reject)=>{
 	let options = {
 		hostname:'forex.cbm.gov.mm',
 		port:80,
@@ -20,14 +20,14 @@ function getLatest(cb){
 			try {
 				parsed = JSON.parse(latestExchangeRate);
 			} catch(err) {
-				return cb(err);
+				reject(err);
 			}
-			cb(null,parsed);
+			resolve(parsed);
 		});
 	})
 	.on('error',(err)=>{
-		cb(err);
+		reject(err);
 	});
-}
+});
 
 module.exports = getLatest;

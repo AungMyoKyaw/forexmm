@@ -18,26 +18,24 @@ npm install --save forexmm
 ```
 var forexmm = require('forexmm');
 var latest = forexmm.latest;
-latest((err,data)=>{
-	if(err){
-		console.log(err);
-	} else {
-		console.log(data);
-	}
-});
+latest.then(data=>{
+	console.log(data);
+})
+.catch(err=>{
+	console.log(err);
+})
 ```
 
 ### currencies
 ```
 var forexmm = require('forexmm');
 var currencies = forexmm.currencies;
-currencies((err,data)=>{
-	if(err){
-		console.log(err);
-	} else {
-		console.log(data);
-	}
-});
+currencies.then(data=>{
+	console.log(data);
+})
+.catch(err=>{
+	console.log(err);
+})
 ```
 
 ### history
@@ -45,12 +43,11 @@ currencies((err,data)=>{
 var forexmm = require('forexmm');
 var history = forexmm.history;
 var date = 6-2-2017; //dd-mm-yyyy
-history(date,(err,data)=>{
-	if(err){
-		console.log(err);
-	} else {
-		console.log(data);
-	}
+history(date).then(data=>{
+	console.log(data);
+})
+.catch(err=>{
+	console.log(err);
 });
 ```
 
@@ -58,6 +55,7 @@ history(date,(err,data)=>{
 ```
 const express = require('express');
 const app = express();
+const PORT = process.env.PORT || 80;
 
 const forexmm = require('forexmm');
 const latest = forexmm.latest;
@@ -65,34 +63,30 @@ const currencies = forexmm.currencies;
 const history = forexmm.history;
 
 app.get('/latest',(req,res)=>{
-	latest((err,data)=>{
-		if(err){
-			res.sendStatus(500);
-		} else {
-			res.json(data);
-		}
-	});
+	latest.then(data=>{
+		res.json(data);
+	})
+	.catch(err=>{
+		res.status(500).json({err:err.message});
+	})
 });
 
 app.get('/currencies',(req,res)=>{
-	currencies((err,data)=>{
-		if(err){
-			res.sendStatus(500);
-		} else {
-			res.json(data);
-		}
-	});
+	currencies.then(data=>{
+		res.json(data);
+	})
+	.catch(err=>{
+		res.status(500).json({err:err.message});
+	})
 });
 
 app.get('/history/:date',(req,res)=>{
 	let date = req.params.date;
-	history(date,(err,data)=>{
-		if(err){
-			console.log(err);
-			res.sendStatus(500);
-		} else {
-			res.json(data);
-		}
+	history(date).then(data=>{
+		res.json(data);
+	})
+	.catch(err=>{
+		res.status(500).send({err:err.message});
 	});
 });
 
@@ -100,7 +94,7 @@ app.all("*",(req,res)=>{
 	res.sendStatus(404);
 });
 
-app.listen(80,()=>{
-	console.log(':)');
+app.listen(PORT,()=>{
+	console.log(`forexmm api server is running on port ${PORT}`);
 });
 ```

@@ -2,7 +2,7 @@
 'use strict';
 const http = require('http');
 
-function getcurrencies(cb){
+const getcurrencies = new Promise((resolve,reject)=>{
 	let options = {
 		hostname:'forex.cbm.gov.mm',
 		port:80,
@@ -20,14 +20,14 @@ function getcurrencies(cb){
 			try {
 				parsed = JSON.parse(currencies);
 			} catch(err) {
-				return cb(err);
+				reject(err);
 			}
-			cb(null,parsed);
+			resolve(parsed)
 		});
 	})
 	.on('err',(err)=>{
-		cb(err);
+		reject(err);
 	});
-}
+});
 
 module.exports = getcurrencies;
