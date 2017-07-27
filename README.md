@@ -1,7 +1,13 @@
-# FOREXMM [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/AungMyoKyaw/forexmm/issues)[![NSP Status](https://nodesecurity.io/orgs/aung-myo-kyaw/projects/33eab043-23a0-4fff-a650-57066c299938/badge)](https://nodesecurity.io/orgs/aung-myo-kyaw/projects/33eab043-23a0-4fff-a650-57066c299938)
+# FOREXMM
+> Myanmar Exchange Rate
+
+[![Build Status][travis]][travis-url]
+[![NSP Status][nsp]][nsp-url]
+[![contributions welcome][contri]][contri-url]
 
 [http://forex.cbm.gov.mm/index.php/api](http://forex.cbm.gov.mm/index.php/api) does not allow CORS.
 This npm package help you to bypass CORS issue and to build Myanmar Exchange Rate API server.
+===
 
 ## Installation
 ```
@@ -14,7 +20,7 @@ npm install --save forexmm
 - history
 
 ### latest
-```
+```javascript
 var forexmm = require('forexmm');
 var latest = forexmm.latest;
 latest.then(data=>{
@@ -26,7 +32,7 @@ latest.then(data=>{
 ```
 
 ### currencies
-```
+```javascript
 var forexmm = require('forexmm');
 var currencies = forexmm.currencies;
 currencies.then(data=>{
@@ -38,10 +44,10 @@ currencies.then(data=>{
 ```
 
 ### history
-```
+```javascript
 var forexmm = require('forexmm');
 var history = forexmm.history;
-var date = 6-2-2017; //dd-mm-yyyy
+var date = '6-2-2017'; //dd-mm-yyyy
 history(date).then(data=>{
 	console.log(data);
 })
@@ -51,7 +57,7 @@ history(date).then(data=>{
 ```
 
 #### Sample API Server Using Express.js
-```
+```javascript
 const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 80;
@@ -97,3 +103,13 @@ app.listen(PORT,()=>{
 	console.log(`forexmm api server is running on port ${PORT}`);
 });
 ```
+
+## License
+[MIT](./lICENSE)
+
+[contri]: https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat
+[contri-url]: https://github.com/AungMyoKyaw/forexmm/issues
+[nsp]: https://nodesecurity.io/orgs/aung-myo-kyaw/projects/33eab043-23a0-4fff-a650-57066c299938/badge
+[nsp-url]: https://nodesecurity.io/orgs/aung-myo-kyaw/projects/33eab043-23a0-4fff-a650-57066c299938
+[travis]: https://travis-ci.org/AungMyoKyaw/forexmm.svg?branch=master
+[travis-url]: https://travis-ci.org/AungMyoKyaw/forexmm
