@@ -10,9 +10,11 @@ gulp.task('transpile',function(){
 		.pipe(gulp.dest('dist'))
 });
 
-gulp.task('test',function(){
+gulp.task('test',['transpile'],function(){
 	return gulp.src('test/forexmm.test.js')
-		.pipe(mocha())
+		.pipe(mocha({
+			timeout:20000
+		}))
 		.once('error',function(){
 			process.exit(1);
 		})
@@ -21,4 +23,4 @@ gulp.task('test',function(){
 		});
 })
 
-gulp.task('default',['transpile','test']);
+gulp.task('default',['transpile']);
