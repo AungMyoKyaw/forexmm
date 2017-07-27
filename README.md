@@ -5,9 +5,7 @@
 [![NSP Status][nsp]][nsp-url]
 [![contributions welcome][contri]][contri-url]
 
-[http://forex.cbm.gov.mm/index.php/api](http://forex.cbm.gov.mm/index.php/api) does not allow CORS.
-This npm package help you to bypass CORS issue and to build Myanmar Exchange Rate API server.
-===
+[http://forex.cbm.gov.mm/index.php/api](http://forex.cbm.gov.mm/index.php/api) does not allow CORS. This npm package help you to bypass CORS issue and to build Myanmar Exchange Rate API server.
 
 ## Installation
 ```
