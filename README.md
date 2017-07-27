@@ -2,6 +2,7 @@
 > Myanmar Exchange Rate
 
 [![Build Status][travis]][travis-url]
+[![npm][npm-download]][npm-dl-url]
 [![NSP Status][nsp]][nsp-url]
 [![contributions welcome][contri]][contri-url]
 
@@ -111,3 +112,5 @@ app.listen(PORT,()=>{
 [nsp-url]: https://nodesecurity.io/orgs/aung-myo-kyaw/projects/33eab043-23a0-4fff-a650-57066c299938
 [travis]: https://travis-ci.org/AungMyoKyaw/forexmm.svg?branch=master
 [travis-url]: https://travis-ci.org/AungMyoKyaw/forexmm
+[npm-download]: https://img.shields.io/npm/dt/forexmm.svg
+[npm-dl-url]: https://www.npmjs.com/package/forexmm
