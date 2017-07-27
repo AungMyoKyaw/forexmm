@@ -1,5 +1,4 @@
 //get exchange rate history
-'use strict';
 const http = require('http');
 
 const getHistory = function(date){

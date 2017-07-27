@@ -1,4 +1,3 @@
-'use strict';
 //get latest exchange rate
 const latest = require('./forexmm/latest');
 

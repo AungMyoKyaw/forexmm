@@ -1,5 +1,4 @@
 //get latest exchange reate
-'use strict';
 const http = require('http');
 
 const getLatest = new Promise((resolve,reject)=>{

@@ -1,5 +1,4 @@
 //get currencies
-'use strict';
 const http = require('http');
 
 const getcurrencies = new Promise((resolve,reject)=>{
