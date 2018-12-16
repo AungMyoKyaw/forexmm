@@ -117,9 +117,13 @@ app.listen(PORT, () => {
 });
 ```
 
+## Related
+
+- [forexmm-cli](https://github.com/AungMyoKyaw/forexmm-cli)
+
 ## License
 
-[MIT](./lICENSE)
+MIT © [Aung Myo Kyaw](https://github.com/AungMyoKyaw)
 
 [contri]: https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat-square
 [contri-url]: https://github.com/AungMyoKyaw/forexmm/issues
