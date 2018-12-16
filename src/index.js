@@ -8,7 +8,7 @@ const currencies = require('./forexmm/currencies');
 const history = require('./forexmm/history');
 
 module.exports = {
-	latest,
-	currencies,
-	history
-}
+  latest,
+  currencies,
+  history
+};
