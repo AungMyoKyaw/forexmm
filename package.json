@@ -1,0 +1,32 @@
+{
+  "name": "forexmm",
+  "version": "3.0.0",
+  "description": "Myanmar Exchange Rate NPM",
+  "main": "dist/index.js",
+  "types": "dist/src/index.d.ts",
+  "scripts": {
+    "test": "mocha -r ts-node/register ./test/*.spec.ts",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AungMyoKyaw/forexmm.git"
+  },
+  "keywords": [
+    "Myanmar Exchange Rate",
+    "Exchange Rate"
+  ],
+  "author": "Aung Myo Kyaw",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AungMyoKyaw/forexmm/issues"
+  },
+  "homepage": "https://github.com/AungMyoKyaw/forexmm#readme",
+  "devDependencies": {
+    "@types/mocha": "^5.2.5",
+    "@types/node": "^10.12.18",
+    "mocha": "^5.2.0",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.2.2"
+  }
+}
