@@ -27,7 +27,7 @@ npm install --save forexmm
 ```javascript
 var forexmm = require('forexmm');
 var latest = forexmm.latest;
-latest
+latest()
   .then(data => {
     console.log(data);
   })
@@ -41,7 +41,7 @@ latest
 ```javascript
 var forexmm = require('forexmm');
 var currencies = forexmm.currencies;
-currencies
+currencies()
   .then(data => {
     console.log(data);
   })
@@ -55,7 +55,7 @@ currencies
 ```javascript
 var forexmm = require('forexmm');
 var history = forexmm.history;
-var date = '6-2-2017'; //dd-mm-yyyy
+var date = new Date(2018, 1, 4);
 history(date)
   .then(data => {
     console.log(data);
@@ -78,7 +78,7 @@ const currencies = forexmm.currencies;
 const history = forexmm.history;
 
 app.get('/latest', (req, res) => {
-  latest
+  latest()
     .then(data => {
       res.json(data);
     })
@@ -88,7 +88,7 @@ app.get('/latest', (req, res) => {
 });
 
 app.get('/currencies', (req, res) => {
-  currencies
+  currencies()
     .then(data => {
       res.json(data);
     })
