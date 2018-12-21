@@ -1,8 +1,8 @@
 {
   "name": "forexmm",
-  "version": "3.0.0",
+  "version": "3.1.1",
   "description": "Myanmar Exchange Rate NPM",
-  "main": "dist/index.js",
+  "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
   "scripts": {
     "test": "mocha -r ts-node/register ./test/*.spec.ts",
