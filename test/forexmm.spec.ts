@@ -1,28 +1,48 @@
 import * as assert from 'assert';
 import 'mocha';
 
-import FOREXMM from '../src/';
+import * as forexmm from '../src/';
+import { Icurrencies } from '../src/lib/currencies';
+import { IexchangeRate } from '../src/lib/exchange-rate';
 
 describe('FOREXMM', () => {
   it('LATEST', done => {
-    const forexmm = new FOREXMM();
-    const exchangeRate = forexmm.exchangeRate();
-    console.log(exchangeRate);
-    done();
+    const { latest } = forexmm;
+    let res: IexchangeRate;
+    (async function() {
+      try {
+        res = await latest();
+        done();
+      } catch (err) {
+        done(err);
+      }
+    })();
   });
 
-  it('CURRENCIES', done => {
-    const forexmm = new FOREXMM();
-    const currencies = forexmm.currencies();
-    console.log(currencies);
-    done();
+  it('CURRENCIES', function(done) {
+    const { currencies } = forexmm;
+    let res: Icurrencies;
+    (async function() {
+      try {
+        res = await currencies();
+        done();
+      } catch (err) {
+        done(err);
+      }
+    })();
   });
 
   it('HISTORY', done => {
-    const date = new Date(2018, 1, 4);
-    const forexmm = new FOREXMM(date);
-    const exchangeRate = forexmm.exchangeRate();
-    console.log(exchangeRate);
-    done();
+    const { history } = forexmm;
+    let res: IexchangeRate;
+    (async function() {
+      try {
+        const date = new Date(2018, 1, 4);
+        res = await history(date);
+        done();
+      } catch (err) {
+        done(err);
+      }
+    })();
   });
 });
