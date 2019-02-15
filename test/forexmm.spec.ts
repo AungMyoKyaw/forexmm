@@ -6,43 +6,22 @@ import { Icurrencies } from '../src/lib/currencies';
 import { IexchangeRate } from '../src/lib/exchange-rate';
 
 describe('FOREXMM', () => {
-  it('LATEST', done => {
+  it('LATEST', async () => {
     const { latest } = forexmm;
     let res: IexchangeRate;
-    (async function() {
-      try {
-        res = await latest();
-        done();
-      } catch (err) {
-        done(err);
-      }
-    })();
+    res = await latest();
   });
 
-  it('CURRENCIES', function(done) {
+  it('CURRENCIES', async () => {
     const { currencies } = forexmm;
     let res: Icurrencies;
-    (async function() {
-      try {
-        res = await currencies();
-        done();
-      } catch (err) {
-        done(err);
-      }
-    })();
+    res = await currencies();
   });
 
-  it('HISTORY', done => {
+  it('HISTORY', async () => {
     const { history } = forexmm;
     let res: IexchangeRate;
-    (async function() {
-      try {
-        const date = new Date(2018, 1, 4);
-        res = await history(date);
-        done();
-      } catch (err) {
-        done(err);
-      }
-    })();
+    const date = new Date(2018, 1, 4);
+    res = await history(date);
   });
 });
