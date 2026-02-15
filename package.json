@@ -1,20 +1,26 @@
 {
   "name": "forexmm",
   "version": "3.1.2",
-  "description": "Myanmar Exchange Rate NPM",
+  "description": "Myanmar Exchange Rate NPM - Fetch exchange rates from the Central Bank of Myanmar",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
   "scripts": {
     "test": "mocha -r ts-node/register ./test/*.spec.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AungMyoKyaw/forexmm.git"
   },
   "keywords": [
-    "Myanmar Exchange Rate",
-    "Exchange Rate"
+    "myanmar",
+    "exchange rate",
+    "forex",
+    "currency",
+    "mmk",
+    "central bank",
+    "myanmar kyat"
   ],
   "author": "Aung Myo Kyaw",
   "license": "MIT",
@@ -28,5 +34,11 @@
     "mocha": "^5.2.0",
     "ts-node": "^7.0.1",
     "typescript": "^3.2.2"
-  }
+  },
+  "engines": {
+    "node": ">=10"
+  },
+  "files": [
+    "dist/src"
+  ]
 }

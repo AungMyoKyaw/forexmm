@@ -1,137 +1,193 @@
 # FOREXMM
 
-> Myanmar Exchange Rate
+> Myanmar Exchange Rate - NPM package for fetching exchange rates from the Central Bank of Myanmar
 
-[![Build Status][travis]][travis-url]
-[![code style: prettier][prettier]][prettier-url]
-[![npm][npm-download]][npm-dl-url]
-[![contributions welcome][contri]][contri-url]
-[![License: MIT][license]][license-url]
+[![npm version](https://img.shields.io/npm/v/forexmm.svg?style=flat-square)](https://www.npmjs.com/package/forexmm)
+[![npm downloads](https://img.shields.io/npm/dt/forexmm.svg?style=flat-square)](https://www.npmjs.com/package/forexmm)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+[![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 
-[http://forex.cbm.gov.mm/index.php/api](http://forex.cbm.gov.mm/index.php/api) does not allow CORS. This npm package help you to bypass CORS issue and to build Myanmar Exchange Rate API server.
+The [Central Bank of Myanmar API](http://forex.cbm.gov.mm/index.php/api) does not allow CORS. This NPM package helps you bypass the CORS issue and build your own Myanmar Exchange Rate API server.
 
 ## Installation
 
+```bash
+npm install forexmm
 ```
-npm install --save forexmm
+
+```bash
+yarn add forexmm
 ```
 
-## API List
+```bash
+bun add forexmm
+```
 
-- latest
-- currencies
-- history
+## API
 
-### latest
+### latest()
+
+Fetch the latest exchange rates.
 
 ```javascript
-var forexmm = require('forexmm');
-var latest = forexmm.latest;
-latest()
-  .then(data => {
+const forexmm = require('forexmm');
+
+forexmm
+  .latest()
+  .then((data) => {
     console.log(data);
   })
-  .catch(err => {
-    console.log(err);
+  .catch((err) => {
+    console.error(err);
   });
 ```
 
-### currencies
+### currencies()
+
+Fetch the list of available currencies.
 
 ```javascript
-var forexmm = require('forexmm');
-var currencies = forexmm.currencies;
-currencies()
-  .then(data => {
+const forexmm = require('forexmm');
+
+forexmm
+  .currencies()
+  .then((data) => {
     console.log(data);
   })
-  .catch(err => {
-    console.log(err);
+  .catch((err) => {
+    console.error(err);
   });
 ```
 
-### history
+### history(date)
+
+Fetch historical exchange rates for a specific date.
 
 ```javascript
-var forexmm = require('forexmm');
-var history = forexmm.history;
-var date = new Date(2018, 1, 4);
-history(date)
-  .then(data => {
+const forexmm = require('forexmm');
+
+// Using Date object
+const date = new Date(2018, 1, 4); // February 4, 2018
+forexmm
+  .history(date)
+  .then((data) => {
     console.log(data);
   })
-  .catch(err => {
-    console.log(err);
+  .catch((err) => {
+    console.error(err);
+  });
+
+// Using string (DD-MM-YYYY format)
+forexmm
+  .history('04-02-2018')
+  .then((data) => {
+    console.log(data);
+  })
+  .catch((err) => {
+    console.error(err);
   });
 ```
 
-#### Sample API Server Using Express.js
+## TypeScript Usage
+
+This package includes TypeScript type definitions.
+
+```typescript
+import { latest, history, currencies, IExchangeRate, ICurrencies } from 'forexmm';
+
+// Latest exchange rates
+const latestRates: IExchangeRate = await latest();
+console.log(latestRates.rates);
+
+// Historical rates
+const historicalRates: IExchangeRate = await history(new Date(2018, 1, 4));
+console.log(historicalRates.rates);
+
+// Available currencies
+const currencyList: ICurrencies = await currencies();
+console.log(currencyList.currencies);
+```
+
+### Type Definitions
+
+```typescript
+interface IExchangeRate {
+  info: string;
+  description: string;
+  timestamp: string;
+  rates: {
+    [currency: string]: string;
+  };
+}
+
+interface ICurrencies {
+  info: string;
+  description: string;
+  currencies: {
+    [code: string]: string;
+  };
+}
+```
+
+## Express.js API Server Example
 
 ```javascript
 const express = require('express');
+const { latest, currencies, history } = require('forexmm');
+
 const app = express();
-const PORT = process.env.PORT || 80;
+const PORT = process.env.PORT || 3000;
 
-const forexmm = require('forexmm');
-const latest = forexmm.latest;
-const currencies = forexmm.currencies;
-const history = forexmm.history;
-
-app.get('/latest', (req, res) => {
-  latest()
-    .then(data => {
-      res.json(data);
-    })
-    .catch(err => {
-      res.status(500).json({ err: err.message });
-    });
+app.get('/latest', async (req, res) => {
+  try {
+    const data = await latest();
+    res.json(data);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
-app.get('/currencies', (req, res) => {
-  currencies()
-    .then(data => {
-      res.json(data);
-    })
-    .catch(err => {
-      res.status(500).json({ err: err.message });
-    });
+app.get('/currencies', async (req, res) => {
+  try {
+    const data = await currencies();
+    res.json(data);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
-app.get('/history/:date', (req, res) => {
-  let date = req.params.date;
-  history(date)
-    .then(data => {
-      res.json(data);
-    })
-    .catch(err => {
-      res.status(500).send({ err: err.message });
-    });
-});
-
-app.all('*', (req, res) => {
-  res.sendStatus(404);
+app.get('/history/:date', async (req, res) => {
+  try {
+    const data = await history(req.params.date);
+    res.json(data);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
 app.listen(PORT, () => {
-  console.log(`forexmm api server is running on port ${PORT}`);
+  console.log(`FOREXMM API server running on port ${PORT}`);
 });
 ```
 
-## Related
+## Related Projects
 
-- [forexmm-cli](https://github.com/AungMyoKyaw/forexmm-cli)
+- [forexmm-cli](https://github.com/AungMyoKyaw/forexmm-cli) - Command line interface for this package
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'feat: add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
 ## License
 
-MIT © [Aung Myo Kyaw](https://github.com/AungMyoKyaw)
+MIT License - see the [LICENSE](LICENSE) file for details.
 
-[contri]: https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat-square
-[contri-url]: https://github.com/AungMyoKyaw/forexmm/issues
-[travis]: https://img.shields.io/travis/AungMyoKyaw/forexmm/master.svg?style=flat-square
-[travis-url]: https://travis-ci.org/AungMyoKyaw/forexmm
-[npm-download]: https://img.shields.io/npm/dt/forexmm.svg?style=flat-square
-[npm-dl-url]: https://www.npmjs.com/package/forexmm
-[license]: https://img.shields.io/badge/License-MIT-brightgreen.svg?style=flat-square
-[license-url]: https://opensource.org/licenses/MIT
-[prettier]: https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square
-[prettier-url]: https://github.com/prettier/prettier
+## Author
+
+[Aung Myo Kyaw](https://github.com/AungMyoKyaw)
